@@ -33,7 +33,20 @@
 						</header>
 						<p style="display: inline;"><font size="4"><strong>Twitch Stream: </strong><a href="https://www.twitch.tv/khaoscomplex">https://www.twitch.tv/khaoscomplex</a><br /><br />
 						Smite has given me the opportunity to grow my public image and I have taken advantage of that by streaming ocassionally.
-									On Twitch the stream pulls in 100-300 viewers concurrently and my twitter has grown to ~5000 followers.</p>
+									On Twitch the stream pulls in 100-300 viewers concurrently and my twitter has grown to ~5000 followers.</p><br /><br />
+						<script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+						<div id="{PLAYER_DIV_ID}"></div>
+						<script type="text/javascript">
+							var options = {
+								width: 854,
+								height: 480,
+								channel: "KhaosComplex", 
+								//video: "{VIDEO_ID}"       
+							};
+							var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
+							player.setVolume(0.5);
+							player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+						</script>
 						<img src="images/fulls/06.jpg" style="max-width:100%; max-height:100%;" alt="" />
 						<ul class="actions">
 							<li><a href="index.html" class="button">Back</a></li>
