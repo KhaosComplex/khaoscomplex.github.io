@@ -3239,3 +3239,15 @@
 	.overlay {
 		background-color: transparent; /* If there's an overlay or container with background */
 	}
+
+	.header, 
+	.main-section, 
+	.footer, 
+	.content-box {
+		background-color: transparent;
+	}
+
+	.content-box {
+		border: none;
+		box-shadow: none;
+	}
