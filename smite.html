@@ -19,35 +19,599 @@
 			<header id="header">
 				<div class="inner">
 					<!--<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>-->
-					<h1><strong>I am Alex</strong>, <br />a dedicated programmer <br />with a passion to inspire.</h1>
+					<h1><strong>I am Alex</strong>, <br />a dedicated programmer <br />with a passion to innovate.</h1>
 				</div>
 			</header>
 
 		<!-- Main -->
-			<div id="main">
+		<div id="main">
 
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h2>Professional Smite</h2>
-						</header>
-						<p style="display: inline;"><font size="4"><strong>Professional Profile: </strong><a href="http://esports.smitegame.com/player/khaos/">http://esports.smitegame.com/player/khaos/</a><br /><br />
-						Contracted by both Hirez Studios and eUnited to play the video game Smite professionally. I'm responsible for competiting live in both an online and LAN setting. I work closely with 4 other members in a high pressure team environment. Last year we placed 2nd in the world during the Smite World Championship. The following year the community voted me in as the All-Star North American mid laner.</font></p><br /><br />
-						<iframe width="840" height="473" src="https://www.youtube.com/embed/H07rXdLfVRc" frameborder="0" allowfullscreen></iframe>
-						<img src="images/fulls/05.jpg" style="max-width:100%; max-height:100%;" alt="" />
-						<ul class="actions">
-							<li><a href="index.html" class="button">Back</a></li>
+			<!-- One -->
+			<section id="one">
+				<header class="major">
+					<h2>Smite</h2>
+				</header>
+				<p style="display: inline;">
+					<font size="4">
+						<strong>Current Title:</strong> Advanced Gameplay Programmer<br />
+						<strong>Current Project:</strong> Smite 2 <i>(Prev: Smite 1)</i><br />
+						<strong>Employment:</strong> September 2017 - Present (7+ years)<br />
+						<strong>Engines:</strong> Unreal Engine 3 <i>(Smite 1)</i> / Unreal Engine 5 <i>(Smite 2)</i><br />
+						<strong>Game Site: </strong><a href="https://www.smitegame.com/">https://www.smitegame.com/</a><br /><br />
+					</font>
+					<h3>General Information:</h3>
+					<font size="4">
+						Starting fresh out of college, I retired as an esports player to join HiRez as an associate gameplay programmer. Over the many years, I've helped improve our gameplay systems across a very dense range of topics. As the years went on, I transitioned to mid level, lead, and eventually advanced where I am today.<br /><br />
+		
+						Since the nature of my work here at HiRez expands many topics, I'll do my best to condense highlights from many of the major features I've worked on. There has been a lot more to the job than just these mentions, but I figure these help emphasize areas that are particularly notable.
+					</font>
+				</p>
+
+				<!-- Horizontal line to separate sections -->
+				<hr style="border: 1px solid #ccc; margin: 2em 0;" />
+		
+				<!-- New Section: Engineering Smite 2 -->
+				<header class="major">
+					<h3>Engineering (Smite 2)</h3>
+					<h4><i>Project is moving fast and harder to organize, so compiling everything into this section.</i></h4>
+				</header>
+
+				<div class="god-development-container">
+					<div class="god-development-item">
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>FOV:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Meticously dug in between both games and ensured FOV settings were 1:1 with Smite 1.</li>
+							</ul>
+							<img src="images/fulls/FOVParity.jpg" style="max-width:90%; max-height:90%;" alt="" />
+
+							<p style="display: inline;">
+								<font size="4"><strong>Camera/Aiming:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Smite uses two different types of pitch settings, restricted and unrestricted. Restricted limits your aim beyond the horizon, unrestricted lets you look up to the sky.</li>
+								<li>For unrestricted it's easy, each turn step is constant.</li>
+								<li>For restricted, we use two main curves. One that determines your pitch "sensitivty" based on whether or not you're looking closer to your feet (more sensitive) or further out (less sensitive). This is because the angle deltas for each pitch change grow as you get further out. Then, we have a second curve, that converts your "intended" pitch into a restricted pitch. This allows us to further fine tune how targeters move on the ground.</li>
+								<li>Ported and setup a sensitivity system that enables you to use your exact settings in Smite 1, in Smite 2, and get the same turn deltas you'd expect. It feels 1:1.</li>
+								<li>Wrote scripts for Smite 1 that spit out exact turn steps and deltas so that I could get controller sensitivities/controls exactly right.</li>
+								<li>Implemented turn acceleration for controllers. This ramps up your turn speed as you hold a specific turn.</li>
+								<li>Helped define the logic to ensure that the camera Z heights match up between Smite 1 and 2.</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Movement:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Implemented flight physics that is used on a couple characters. Allows you to ascend, fly for a bit, and descent afterwards. All design configurable. Includes turn radius logic, camera speed adjustments, input while ascending, speed and acceleration, etc.</li>
+								<li>Completely overhauled Smite 2's velocity and acceleration systems to match Smite 1. This involved porting over CalcVelocity functions and resolving engine discrepencies. Specifically made sure input processing for movement was happening as quickly as possible.</li>
+								<li>Reintroduced back body blocking by better supporting server authorized movement.</li>
+								<li>Wrote specific client interpolation logic for smoothing server corrections. It works by caching your current client location, rewinding unack'd moves, applying the server correction, resetting your location back to the cached one, taking the difference between the intended server location and your current, and then applying an interpolated amount of that correction every tick. For example now, if you are slowed on the server while running at full speed, normally you would hitch because you'd have to correct for the distance traveled at full speed that was actually slow on the server. Instead of hard popping, you now interpolate that correction.</li>
+								<li>Improved general movement tweens by allowing you to gain full movement speed at a specific input direction whenever you finish the tween. If you hold right for example as the tween resolves, you'll immediately start at full speed right. It feels super fluid to play.</li> <a href="https://x.com/KhaosComplex/status/1834312805421326645">https://x.com/KhaosComplex/status/1834312805421326645</a>
+								<li>Helped pioneer ignoring client corrections during pre-determined movements. Basically if you know the end location, then client shouldn't need to correct it's location during a tween/dash/etc. as long as it resolves in the same spot as the server would. This prevents a ton of jitter/hitching. First character in Smite 1 to use it was Maui, and that pattern continued well into Smite 2.</li>
+								<li>Certain abilities can cause you to encroach other players. Wrote specific logic to prevent further encroachment (but allow you to leave the player).</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Minion AI:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Ported a ton of the incredible minion features from Smite 1 to 2. This took a massive amount of effort because the AI system in UE3 is very different than UE5's.</li> <a href="https://x.com/KhaosComplex/status/1821277206993309864">https://x.com/KhaosComplex/status/1821277206993309864</a>
+								<li>Enabled minions to have squad and spread logic. If they are within a certain distance of other minions, they'll group together and join as squads. They will also periodically calculate spread locations so that they don't just stand in a pile and attack you with a formation.</li>
+								<li>This enabled them to not need specific designer formations as they were dynamic and able to respond to combat breaking out in any situation.</li>
+								<li>Refined the entire minion "knockback" system which is where minions have hit reactions that push them in certain directions based on ability normals and impacts. Every ability was updated to use these new settings and it was extremely well received by players.</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>God Polish:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>My experience as a pro for the game leaves me with a strong game feel intuition. I went through every single god, detailing specific issues that weren't up to par with their Smite 1 counterparts. Working closely with design, we resolved all those gaps, and implemented any missing features.</li>
+								<li>Beyond that, I continuously look for ways to improve the gods as we are developing beyond just parity with Smite 1. This was a large part of my job before transitioning, and continued to be after joining Smite 2.</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Performance:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Profiling the game whenever we get opportunities with traces. As my main focus has been game feels, on Smite 2 specifically I haven't had as many opportunities to directly optimize the game, but I have delegated a lot of what I discovered in the traces. Worked with multiple departments to resolve issues I found. (shadows, rendering, UI, GP, etc.)</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Input/Controls:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Brought controller deadzones into Smite 2.</li>
+								<li>Implemented SOCD (Simultaneous Opposing Cardinal Directions) into the game for WASD. Allows players to alternate A/D and W/S with last input priority.</li><a href="https://x.com/KhaosComplex/status/1834311943705989316">https://x.com/KhaosComplex/status/1834311943705989316</a>
+							</ul>
+
+							<!-- Hercules Section -->
+							<div class="god-development-item">
+							<div class="video-container">
+								<iframe width="420" height="240" src="https://www.youtube.com/embed/JVelkmXJBns?si=_6N3nVjkZHsTmDlJ" frameborder="0" allowfullscreen></iframe>
+							</div>
+							<div class="text-container">
+								<p style="display: inline;">
+									<font size="4"><strong>Hercules:</strong></font>
+								</p>
+								<ul style="font-size: 1rem; margin-left: 1em;">
+									<li>Updated his second ability (Earthbreaker) physics from Smite 1 -> 2. In Smite 1, targets being knocked up specifically trace to the first blocking wall, and choose that as the end location. In Smite 2, it is a true lob where they can physically slide against walls as they travel.</li>
+									<li>His ultimate (Excavate) has him pick up a huge boulder and throw it. I wrote specific logic to handle the tradeoff between the boulder mesh in his hands and the deployable he ends up throwing. We let the boulder be visible in his animation until the deployable spawns. Once the deployable spawns we specifically track where the mesh is in your hands, find the location/rotation offsets, and offset the deployable's boulder mesh to match up. Then we tell the mesh in your hands to hide. As the boulder travels through the air, it corrects the offset before landing so by the time it's on the ground it's centered properly again. This creates a seemless handoff regardless of latency or ping.</li>
+									<li>Implemented a ton of physics features to have the boulder vertically bounce multiple times, and bounce off walls. It also has speed dampening and call back events for all those bounces that design can hook into. Also separated the target radius from the world collision radius to allow it to move in between walls better.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Horizontal line to separate sections -->
+				<hr style="border: 1px solid #ccc; margin: 2em 0;" />
+
+				<!-- New Section: Engineering Smite 2 -->
+				<header class="major">
+					<h3>Engineering (Smite 1 / 2)</h3>
+					<h4><i>General engineering feats that applied to both games.</i></h4>
+				</header>
+
+				<div class="god-development-container">
+					<div class="god-development-item">
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>Crit PRNG:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Completely overhauled and pioneered a new crit probability algorithm that enables you to have your intended crit chance without the potential of drawn out miss/crit streaks.</li>
+								<li>Uses C style PRNG, which is basically is a formula for determining raw crit chance. Let's say you have 25% crit, with C PRNG you start at 8.5%. Everytime you miss, you increase by 8.5% for the next attack. 8.5% - 17% - 25.5% -> etc. At some point, you will crit. This will reset the crit chance back to 8.5%. This helps ensure that you don't go too long without missing crits compared to normal random chance, and still works out to be a real 25% chance (you'll crit 25/100 times for example).</li>
+								<li>However, we take it a step further in Smite. We flip the formula a bit once you start the crit streak. Basically with every successive crit, you gain more chance to miss. With every successive miss, you gain more chance to crit. This clamps the streaks on both sides, and still perserves the authenticity of the true crit rate.</li>
+								<li>Feel free to read a more detailed explaination of the solution here:</li><a href="https://x.com/KhaosComplex/status/1480945933575720961">https://x.com/KhaosComplex/status/1480945933575720961</a>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Ability Instance Tracker:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Specifically wrote a struct class that handled tracking abilities, their firing instances, and hit counts. This would enable designers to do things like "once per ability per target".</li>
+								<li>The struct had operator overloads to make array operations like .contains() and == very simple.</li>
+								<li>It also had logic to auto purge old entries so that no one had to explicitly manage those entries, they just cleaned themselves up over time. Did not use tick, instead, purge old entries is called anytime the list is interacted with.</li>
+							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Builds:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Learned quickbuild and various surrounding systems to reliably fix our nightly builds and make sure our automated processes were running.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				
+				<!-- Horizontal line to separate sections -->
+				<hr style="border: 1px solid #ccc; margin: 2em 0;" />
+
+				<!-- New Section: Engineering Smite 2 -->
+				<header class="major">
+					<h3>Leadership (Smite 1)</h3>
+					<h4><i>Information about my time as Lead of Gameplay Programming.</i></h4>
+				</header>
+
+				<div class="god-development-container">
+					<div class="god-development-item">
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>Management:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Led a team of 3-4 gameplay programmers, overseeing the complete lifecycle of gameplay features.</li>
+								<li>Managed scheduling, jiras, and task delegation for our upcoming features.</li>
+								<li>Conducted biweekly 1:1s and performance/code reviews.</li>
+								<li>Collaborated strategically with other company leads/directors for game direction.</li>
+								<li>Pushed internally to have the team consistently weigh time spent vs ROI to ensure that we were reliably focusing on producing value.</li>
+								<li>First line of defense for anything, and accountable for ensuring our patches went out the door with high quality and on time.</li>
+								<li>Generally helped reduce our bug rate and get us to polish phase faster.</li>
+								<li>Enjoyed my time as lead. I like listening to others and making impacts that help improve their jobs and build them up.</li>
+								<li>Maintained individual contributor duties.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+		
+				<!-- Horizontal line to separate sections -->
+				<hr style="border: 1px solid #ccc; margin: 2em 0;" />
+		
+				<!-- New Section: God Development -->
+				<header class="major">
+					<h3>God Engineering (Smite 1) - Primary Developer</h3>
+					<h4><i>Programmed their entire kits, on top of these notable mentions.</i></h4>
+				</header>
+
+				<div class="god-development-container">
+					<!-- Cerberus Section -->
+					<div class="god-development-item">
+						<div class="video-container">
+							<iframe width="420" height="240" src="https://www.youtube.com/embed/4IU1zWWJRr4?si=VH5VW1jGsTpgTW5T" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>Cerberus:</strong></font>
+							</p>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Made a management system to track which heads are currently active as they interact with his inhands, first, and second abilities.</li>
+								<li>Created a system to spawn copies of the targets he lands on with his third ability, and apply a ghostly material to them. They are fully damageable and heal him when expelled.</li>
+								<li>Invented a new form of CC for the game called suspension, which causes the targets to slowly rise (or fall if they were already higher) to a midpoint before being flung towards a target location.</li>
+							</ul>
+						</div>
+					</div>
+					
+					<!-- Baron Samedi Section -->
+					<div class="god-development-item">
+						<div class="video-container">
+							<iframe width="420" height="240" src="https://www.youtube.com/embed/RBiWUS3_6Kk?si=UoGpKe1x7U0p4RVN" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>Baron Samedi:</strong></font>
+							</p>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Extended our deployable spawning tech to spawn multiple deployables at the same time with different aim settings. (Vivid Gaze)</li>
+								<li>Fine tuned our homing tech to give his second ability (Consign Spirits) return projectile some spiral.</li>
+								<li>Improved our vortexes (pull volume tech) to support cone slice aiming. This allows him to channel a vortex in a specific cone shape. (Ultimate: Life of the Party)</li>
+								<li>Vortex is specifically simulated on both Client and Server to reduce jitter and frequency of client/server corrections.</li>
+								<li>Implemented an entire "Hysteria" system to support his passive, which tracks hysteria stacks on targets and augments and enhances his abilities based on their current hysteria count.</li>
+								<li>Extended our store to support granted items from abilities. This allowed Baron Samedi to offer a special brew in the store that only your teammates could buy.</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- King Arthur Section -->
+					<div class="god-development-item">
+						<div class="video-container">
+							<iframe width="420" height="240" src="https://www.youtube.com/embed/kL-s6X-v6b0?si=BgIQ2tA52q_NPcHt" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>King Arthur:</strong></font>
+							</p>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Considered one of the best gods to ever get added to Smite. Incredibly tech rich.</li>
+								<li>Implemented new technology for in hand attacks that home in on his main target. Included input checking (holding back while attacking) to disable the homing portion based.</li>
+								<li>Improved our ability swapping technology. Originally we hard pushed/popped abilities out of their equipment array whenever a swap occured. This is because the specific index in the array determined which ability slot it corresponded with. Instead, we now hard cache all of their potential abilities and store them in one larger equipment array (32 elements). Whenever a swap occurs, we just alter the indexes that those ability slots point to and update the icons. The elements themselves never move, just the indexes that we point to update. This allows us swap abilities icons immediately on clients, and reduced network overhead by no logner needing to replicate a whole new ability to the client every time a swap occured. Made the entire system much more responsive.</li>
+								<li>Created a clever solution to handle allowing his ultimate (Excalibur's Wrath) to animate all targets while being slashed around. We animate a box mesh, hide it, attach the targets to it, and tell the box to animate. This gives his ulimate an extremely unique and charateristic feel.</li>
+								<li>Strongly inspired by narrative action games, I created a large suite of procedural camera tools. These mainly allowed design to control camera movement and zoom keyframes during his abilities to again, give him an even more distinct feel. This is most noticeable on the receiving end from his ultimate, where you camera cleanly transitions and gently sways while you're being slashed around.</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Horus Section -->
+					<div class="god-development-item">
+						<div class="video-container">
+							<iframe width="420" height="240" src="https://www.youtube.com/embed/td6NzBTYxh0?si=Z2nFZpCWkrT9ZR8s" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="text-container">
+							<p style="display: inline;">
+								<font size="4"><strong>Horus:</strong></font>
+							</p>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>For his third ability (Protector's Surge), created new tween movement technology to support following a target. Managed gracefully the plethora of states and edge cases that the target player you're flying to can be in to make sure Horus always safely reaches a target and resolves.</li>
+								<li>Created a clever way to support his ultimate (To The Skies!), which is having a clone fly up while your real body sits on the ground. You target a end location and teleport everyone to it. To support the clone, we leave the real body behind and spawn a new pawn where we forward all of the movement inputs, velocity, acceleration, etc. to (while zeroing them out on the main pawn). The camera is also then set to follow the clone.</li>
+								<li>For the large circular teleport, specific safety checks were included to prevent characters from teleporting into world geometry and invalid locations. Basically always finding the first valid location flush against the wall from the direction towards the center of the teleport deployable.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Yemoja Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/y1e90zQxtcs?si=riVj4R48NojQa-Wv" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Yemoja:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Instead of mana, engineered a new system called Omi. She has no individual cooldowns on abilities, but instead they have specific Omi costs. She can spam whichever abilities she wants, but once her Omi runs out, the cooldowns displayed represent how long until you'll have enough Omi to fire them again. Wrote specific logic to convert mana into CDR since she wouldn't benefit from mana otherwise.</li>
+							<li>For her third ability Riptide (basically enter, get launched forward), created a clean system to tween you towards the center before launching you out forward (so that it's consistent no matter where you enter).</li>
+							<li>For Riptide as well, wrote a specific lockout system to prevent being permentnaly air juggled against a wall or between two separate Yemoja Riptide deployables.</li>
+							<li>Her fourth ability (River's Rebuke) uses an interesting "zipper" collision shape to ensure that as the waves crash, the target is hit in ways that correspond with the ultimate visuals.</li>
+							<li>Since River's Rebuke also has blocking walls, we push players towards the center of the ult if they're in the walls. Since that can cause players to be pushed permanently against wall geo, a specific linear algebra based algorithm was written to determine whether or not the location the player is gonna be pushed to would be invalid, and if so, push them out instead.</li>
 						</ul>
-					</section>
-			</div>
+					</div>
+				</div>
 
+				<!-- Cthulhu Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/SrkTGC78K5c?si=ndp6gyGI6zf57Uux" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Cthulhu:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Created an insanity based system that as the player receives damage from Cthulhu's abilities, causes them to grow more "insane".</li>
+							<li>Worked closely with another engineer to devise the visual portion of Cthulhu's insanity which causes tentacles and eyeballs to appear throughout the map in valid playspaces, and on walls. A specific data structure was created to query points on the map and mark those locations for later deployement. We then have a mesh pool where we recycle and move meshes as you walk through the data's grid. Supported skinning.</li>
+							<li>His ultimate (Descend into Madness) turns you extremely large and swaps all your abilities. An entire state system was developed to support this mesh swap and transition.</li>
+							<li>His ultimate camera needed specific fine tuning and logic to get the state feeling fluid for the player considering just how much of a perspective change it is.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Tiamat Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/Onc9O76000Y?si=o4eYCJ-HUsidqMWW" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Tiamat:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>12 unique abilities independently engineered.</li>
+							<li>She has two stances that swap when she casts her third ability (Grounding Dive). Swapping between those states drives an anim state change to go from upright to quad stances.</li>
+							<li>Her first ability (Primordial Onslaught) has specific logic programmed to correspond the number of shots she's charged with visual elements that spawn behind her.</li>
+							<li>Her second ability (Ruination) brought rounded triangle shapes into the game.</li>
+							<li>Her ultimate ability (Children of Creation) is another stance change that then lets her pick between 3 different abilities. The ability icon swap is simulated on clients immediately and feedback is seemless.</li>
+							<li>2 of those ultimate abilities are AI based. One that spawns in waves and pushes towers. Another that immediately picks a target and dashes towards it.</li>
+							<li>Her quad stance first ability (Consume) added new tech to specifically allow her to have two unique jungle buffs (something that hadn't been done before). We were able to add tech that allows her to execute a jungle camp, gaining a lesser form of the buff, while still dropping the buff for another team to pick up.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Atlas Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/W4eu4Qhdj6k?si=6ErXCXNwrIzlu1Vt" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Atlas:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Normally he has a regular melee in hand attacks. However, he is allowed to throw his Astrolabe using his first ability (Unburden). When deployed, specific tech was implemented to allow auto attacking by pulsing the deployable.</li>
+							<li>His second ability (Gravity Pull) sucks players in, grabs them, and then throws them. If they are further away from atlas, but still hit by the tip of the ability, instead they'll lob to him. Specific physics and fine tuning was done to get this feeling smooth and fluid on both the dealing and receiving end.</li>
+							<li>The fourth ability (Gamma-Ray Burst) had special attention done to support the art requests. It is a massive laser that channels for a bit while spawned before being sent off in for a long time (basically global).</li>
+							<li>Atlas was also a case where I started to have strong delegation as I was helping train up a new associate hire. A big focus here was helping break down the technical approaches to implementing his features, jiraing them up, and assisting the new hire whenever needed.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Ishtar Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/OqqtU6zwVXs?si=Xsinxt-c5fhnAjC0" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Ishtar:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>The last god that I was the <strong>primary</strong> developer on. After Ishtar is when I transitioned to Lead of Gameplay Programming and needed to focus more on management, scheduling responsibilities.</li>
+							<li>She was a strong culimination of a lot of the lessons I had learned over the years.</li>
+							<li>Her first ability (Imbue Arrows) lets her switch between 3 completely unique auto attacks. Leveraged the tech I have mentioned earlier from both Tiamat and King Arthur when it comes to ability swapping. Those 3 auto attacks are one that lobs AOE explosions, one that fires multiple shots in a cone, and one that fires a longer range shot.</li>
+							<li>The Spread Shot auto attack required specific logic to ensure only the center arrow applied in hand basic attack item procs.</li>
+							<li>Her second ability (Rolling Thunder) used distance past a aim point to determine whether or not to spawn deployables in a forward or backward sequence.</li>
+							<li>The third ability (Jolt) was engineered to be incredibly responsive. You dash forward and on impact, begin a sequence where you launch yourself backward while firing an arrow to the ground. The entire sequence was programmed into a single ability space (rather than chaining multiple abilities, reducing complication). Upon impact, specific replication is done to reach down to the client informing of the impact, any corrections needed, and the dash direction.</li>
+							<li>To do the arrow part, I wrote spcific deployable tech. The deployable would spawn, and then immediately spawn a projectile from a socket located on the character. The projectile would be told to home in on the deployable, making impact in a specific amount of time. All of these settings, configurable by design. This allowed a projectile to seemlessly spawn from you, regardless of where you were on the client, and always reach the deployable to simulate an impact explosion in sync with the timings/visuals.</li>
+							<li>The ultimate (Blades of Retribution) also had specific client responsiveness tech built in. When you fire the ult, multiple swords fly out in a cone like pattern. When they land, you can recall them. Anyone hit twice is stunned. To improve client responsiveness I wrote a queue system to allow players to prematurely press the ult while the blades are still traveling. If they do this, it'll queue up the recall to happen immediately upon landing.</li>
+							<li>She generally released with close to no bugs or residual issues. Players specifically commented on her being one of the smoothest releases Smite had had in awhile. At this time, with all the risk management principles I had learned over the years, I strongly wanted to prove we could ship a new god with utmost polish.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Horizontal line to separate sections -->
+				<hr style="border: 1px solid #ccc; margin: 2em 0;" />
+
+				<!-- New Section: God Development -->
+				<header class="major">
+					<h3>God Engineering (Smite 1) - Support Developer</h3>
+					<h4><i>Was responsible for specific features and deliveries on these characters.</i></h4>
+				</header>
+
+				<!-- Baba Yaga Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/FPx5Cyo5Arc?si=v1qv9elNfg1nZSJA" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Baba Yaga:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>For Baba Yaga, I owned her first and third ability.</li>
+							<li>Her first ability (Wild Witchcraft) is super unique to the game. Before you fire the ability, you're granted 1 of 4 random travel patterns, and 1 of 4 elements. The shapes are 2 differnt oriented L's, a Y, and an Oval. As the projectiles travel, they also leave behind a trail. Depending on the element, that trail/projectile hit will apply unique effects.</li>
+							<li>To do the trail, I created specific deployable tech that spawns a collision proxy volume. Instead of growing the volume, we only allow a specific % of the collision proxy area to be "active". As time passes (matching the projectile travel speed), we enable those portions of the proxy to touch and process people.</li>
+							<li>Her first ability object manages the random shape and element picked, and replicates that down to the client. Whenever the projectile and deployable are spawned, we read in that data and apply the corresponding visuals and manage which effects apply to the targets.</li>
+							<li>The oval shape posed interesting challenges, as we had to program a projectile to specifically follow a oval path. This includes highlighting and also the collision proxy touch fill algorithm that I spoke about earlier. I decided on a velocity algorithm that applied less movement in the horizontal direction than the forward. So instead of a perfect circle, it was thinner on the horizontal plane. For the collision proxy fill, I used one large circule collision proxy. I trimmed (prevented) touches that exceed the Oval's horizontal bounds, and used angle logic to determine at what degree the proxy was valid to touch you. (Instead of distance like the L and Y shapes use).</li>
+							<li>Her third ability (Blast Off!) has specific logic makes sure as she leaps, she's always leaping to a valid location. Either the location she's targeting is valid, or a trace to the wall finds a spot flush with the wall that she can reach instead.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Charon Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/wXTs1t9Fhic?si=_lWyX1R1WONmXkXR" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Charon:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>For Charon's second ability (Damnation) he marks enemies in an area. If Charon or his allies hit the marked god once per ability or basic attack, they gain a shield (based on a percentage of Charon's max health), and subsequent shields gained from that target only grant 25% effectiveness. A lot of math and state management was done to ensure the shields you gained used his max health properly, and that we did subsequent shield tracking to know if you were applying a fresh or new shield.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Cliodhna Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/eqcUSig2xhk?si=kiCU4wGLj_6S83NM" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Cliodhna:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>I was in charge of Cliodhna's passive ability (Phantasmal), which is by far one of Smite's most ambitious technical additions.</li>
+							<li>Phantasmal allows you to enter world geometry. While inside the world geometry, we render the boundaries of that world geo with splines. While in that state as well, you can still see all enemies, allies, and their visuals (meshes, VFX, etc.)</li>
+							<li>Supporting this feature was a massive undertaking. Working with my superior at the time, we co developed an algorithm that would scan the map and find those points along the walls. In a hexogonal pattern, the map tracker would make a grid of dots, and do traces between a lower layer of dots to a higher layer. For any world geo intersection points, we'd add them to a list with an index marking a specific wall.</li>
+							<li>Since this required a lot of data processing, we specifically amortized it to do bits and pieces per tick, as to not affect frame rate. By the time you started moving, all the data had finished processing and was stored for use.</li>
+							<li>After the map tracker was finished, I became responsible for making the visual presentation work.</li> 
+							<li>First thing, when entering inside the world geo I rendered a black screen to the foreground, this culled everything behind the screen. Then given the grid of points we have that now span the perimeters of all the walls, I spawned mesh splines and connected them along those points to "outline" the walls. I pushed those splines into the foreground.</li>
+							<li>I then went through creating a management system that would push ALL meshes and VFX in the world to the foreground. That way it would also render on top of the black screen (allowing the rest of the world to still be hidden). This was an incredibly challenging process as it involved finding every entry and exit point for our mesh/VFX spawns on all 130 characters. We also have mesh/VFX pools/recyclers which posed an extra challenge.</li>
+							<li>Upon leaving, the walls, I also had to push all of those systems back into the mid ground so nothing rendered incorrectly. Working with QA on all the edge cases was a lot, but we were able to get them all resolved.</li>
+							<li>Lastly, I spawn a shroud FX around the character to not give them infinite distance.</li>
+							<li>On top of handling the visuals, I also had to handle the physics while inside the wall. Because UE3 at the time did not have baked in support for letting you roam around inside world geoemtry. Colliding against inner faces did not do the sliding logic you'd expect, instead your character would just hard stop. So I had to specifically write physics code to slide your velocity along the inner faces of the world geo when you're running against it with a non 0 angle.</li>
+							<li>If you do however run against the wall at a straight angle, then you will push yourself out. Specific logic as well was written to handle those cases.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Gilgamesh Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/GaiWQZpne18?si=dH99sTgezQYxKwDk" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Gilgamesh:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>For his second ability (Drop Kick) I engineered more procedural camera tech that allowed the tech artists to program zoom, translation, and rotation keyframes.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Heimdallr Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/3_9mCA1JNFA?si=wRMpt6VPLzAO_jEM" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Heimdallr:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>His ultimate (Through the Realms) sends you to Muspelheim. The same procedural camera tech built for the others is used here when you are on the receiving end of this ultimate, offering you a action oriented perspective as you fly through the realms.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Jormungandr Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/z_bsF1TRKVU?si=liqbFBiYHnKonXcK" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Jormungandr:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Was responsible for the camera and ability flow on his ultimate (The World Serpent).</li>
+							<li>In this ultimate, he grows massive and picks a location to launch himself to, 3 times in a row, before finally landing. During this time, damage is dealt between the points he's traveling from and to.</li>
+							<li>Similar to King Arthur, Heimdallr, and Gilgamesh, specific procedural camera tech was used to translate and zoom the camera out as he goes up, giving him the unique perspective that he has.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Maman Brigitte Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/QWaS7OJhiY0?si=JK6BtIxrl8bB84kd" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Maman Brigitte:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Created the state flow for her first ability (Party Trick) which allows her to breath fire, cancel, and repeat until she runs out of alcohol, transitioning the ability to a throw that stuns targets around her.</li>
+							<li>Wrote the logic for her second ability (Madame Fangs) to follow a spline path. Made it incredibly smooth.</li>
+							<li>Fine tuned her ult (Explosion of Souls) to have a clean handoff, similar to what I did for Herc in Smite 2. We wait for the projectile to spawn before hiding the fake one in her animation. Also Uses the same deployable/homing projectile tech that Ishtar uses for her Jolt ability.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Martichoras Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/WR5Cw3LamOs?si=TqCMIkA5jEKkseRj" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Martichoras:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Handled all the rules and logic for targets that are stealthed by his third ability (Stalk Prey).</li>
+							<li>While in Stalk Prey's deployable, you can only see other enemies who are in it if you are also in it. Or, if you put a ward in there. Handled applying the stealth fade and general visibility rules.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Maui Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/ePJey8ZQsvw?si=neyiDNNS73smMnBI" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Maui:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>For his second ability (Mystical Ulua) I added entirely new tween to target tech to support disabling client side corrections until after the tween is over.</li>
+							<li>Since the tween target is synced between client and server, there's no reason to server correct during the follow part, since that is bound to have discrepencies. By disabling it during the tween, it looks super smooth and without jitter. This same pattern is used in Smite 2 today and was applied to more features in Smite 1 after implementation.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Surtr Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/Wg64vg6kXiI?si=tL_lzuxBOL0EJr8L" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Surtr:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Was responsible implementing his ultimate (End of Days) in its entirety.</li>
+							<li>The ability shoots you up as a large meteor and lets you move around the map. At some point during your descent, miniture meteorites break off from you landing in random locations and spawning imps.</li>
+							<li>Specific logic was written to determine as you were falling if you were not giving yourself enough time, given your speed, to land in a valid spot. At the point that the game determines that, it picks a spot for you near where you're aiming, and tweens you to end there.</li>
+							<li>The random imp spawn locations use logic to ensure they also do not ever pick invalid locations.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Yu Huang Section -->
+				<div class="god-development-item">
+					<div class="video-container">
+						<iframe width="420" height="240" src="https://www.youtube.com/embed/Cs6vGJDqKoY?si=N-ZXNpvgB4veEtlo" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="text-container">
+						<p style="display: inline;">
+							<font size="4"><strong>Yu Huang:</strong></font>
+						</p>
+						<ul style="font-size: 1rem; margin-left: 1em;">
+							<li>Wrote the ability flow and mesh translation logic for his third ability (Celestial Flight). An ability that has him move up into the air, float for a bit, and whenever you click, accelerate down landing and doing damage.</li>
+							<li>Originally he was literally floating up in the air. I made the case that it was better to keep his real pawn on the ground, and just translate his mesh up. This way, when he clicks to land fast, it's easy just to speed up the mesh interpolation. It also makes it easy because we don't have to resolve any weird location issues.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</section>
+			<ul class="actions">
+				<li><a href="index.html" class="button">Back</a></li>
+			</ul>
+		</div>
+		
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
 					<ul class="icons">
 						<li><a href="https://twitter.com/KhaosComplex" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="https://github.com/KhaosComplex" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="mailto:Khaos@games.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						<li><a href="mailto:Khaos139@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 					</ul>
 					<ul class="copyright">
 						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

@@ -217,18 +217,31 @@
 
 /* Grid */
 
+	/* Flexbox container for the row */
 	.row {
-		border-bottom: solid 1px transparent;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap; /* Allows items to wrap onto the next row */
+		justify-content: flex-start; /* Ensures items align from the left */
+		margin: 0 0 -1px -2.5em;
 		box-sizing: border-box;
 	}
 
+	/* Ensure items within the row take the appropriate space */
 	.row > * {
-		float: left;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
+		flex: 1 1 45%; /* Set width to 45% to avoid single large items */
+		max-width: 45%; /* Ensure that the maximum width is 45% */
+		padding: 0 0 0 2.5em;
 		box-sizing: border-box;
+		margin-bottom: 2em; /* Optional: adds some spacing at the bottom */
+	}
+
+	/* Responsive layout for smaller screens */
+	@media screen and (max-width: 980px) {
+		.row > * {
+			flex: 1 1 100%; /* Full width for smaller screens */
+			max-width: 100%; /* Ensure they don't exceed the full width */
+			padding: 1em 0;
+		}
 	}
 
 	.row:after, .row:before {
@@ -2508,7 +2521,7 @@
 			-webkit-flex-grow: 1;
 			-ms-flex-grow: 1;
 			flex-grow: 1;
-			margin: 275px 25px 2em 0;
+			margin: 300px 25px 2em 0;
 		}
 
 		#header strong, #header b {
@@ -2543,9 +2556,9 @@
 
 	#footer .copyright {
 		color: rgba(255, 255, 255, 0.4);
-		font-size: 0.8em;
+		font-size: 0.6em;
 		list-style: none;
-		margin: 1em 0 0 0;
+		margin: 0em 0 0 0;
 		padding: 0;
 	}
 
@@ -3124,4 +3137,97 @@
 				padding-left: 0;
 			}
 
+	}
+
+	.about-section h2 {
+		margin-bottom: 0.2em; /* Reduce the space between the name and description */
+	}
+	
+	.about-section h3 {
+		font-size: 1em; /* Adjust the size, change 1em to your preferred size */
+		margin-top: 0; /* Eliminate extra space above the description */
+	}
+	
+	.about-section .actions {
+		margin-top: 1.5em; /* Adjust spacing between the description and button */
+	}
+
+	.god-development-container {
+		display: block; /* Ensures container is block level */
+	}
+	
+	.god-development-item {
+		margin-bottom: 40px; /* Adds space between sections */
+	}
+	
+	.video-container {
+		flex: 1; /* Ensures the video container takes up available space */
+	}
+	
+	.text-container {
+		flex: 2; /* Ensures the text container takes up more space compared to the video */
+		padding-left: 20px; /* Adds spacing between the video and text */
+	}
+	
+	@media (max-width: 768px) {
+		.god-development-item {
+			flex-direction: column; /* Stacks video and text vertically on small screens */
+			align-items: flex-start; /* Aligns items to the left on small screens */
+		}
+	
+		.text-container {
+			padding-left: 0;
+		}
+	}
+
+	:root {
+		/* Define dark mode colors as default */
+		--background-color: #121212;
+		--text-color: #e0e0e0;
+		--header-color: #1f1f1f;
+		--link-color: #bb86fc;
+		--button-background: #333;
+		--button-text-color: #e0e0e0;
+		--border-color: #333;
+	}
+	
+	body {
+		background-color: var(--background-color);
+		color: var(--text-color);
+	}
+	
+	h2, h3 {
+		color: var(--text-color);
+	}
+	
+	a {
+		color: var(--link-color);
+	}
+	
+	button, .button {
+		background-color: var(--button-background);
+		color: var(--button-text-color);
+		border: 1px solid var(--border-color);
+	}
+	
+	.row > * {
+		border-color: var(--border-color);
+	}
+	
+	p {
+		color: var(--text-color); /* This ensures the text inherits the default text color */
+		font-size: 1.25em; /* Adjust the font size as needed */
+	}
+	
+	p strong {
+		color: var(--text-color); /* Strong inherits the text color too */
+		font-weight: bold; /* This ensures the bold effect for <strong> */
+	}
+	
+	ul li {
+		color: var(--text-color);
+	}
+	
+	iframe {
+		border-color: var(--border-color);
 	}
