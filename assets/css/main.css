@@ -3199,6 +3199,7 @@
 	}
 	
 	h2, h3 {
+		background-color: transparent; /* Add transparency */
 		color: var(--text-color);
 	}
 	
