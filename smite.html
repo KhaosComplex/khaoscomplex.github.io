@@ -43,7 +43,7 @@
 					<font size="4">
 						Starting fresh out of college, I retired as an esports player to join HiRez as an associate gameplay programmer. Over the many years, I've helped improve our gameplay systems across a very dense range of topics. As the years went on, I transitioned to mid level, lead, and eventually advanced where I am today.<br /><br />
 		
-						Since the nature of my work here at HiRez expands many topics, I'll do my best to condense highlights from many of the major features I've worked on. There has been a lot more to the job than just these mentions, but I figure these help emphasize areas that are particularly notable.
+						Since the nature of my work here at HiRez expands on many topics, I'll do my best to condense highlights from many of the major features I've worked on. There has been a lot more to the job than just these mentions, but I figure these help emphasize areas that are particularly notable.
 					</font>
 				</p>
 
@@ -73,8 +73,8 @@
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>Smite uses two different types of pitch settings, restricted and unrestricted. Restricted limits your aim beyond the horizon, unrestricted lets you look up to the sky.</li>
 								<li>For unrestricted it's easy, each turn step is constant.</li>
-								<li>For restricted, we use two main curves. One that determines your pitch "sensitivty" based on whether or not you're looking closer to your feet (more sensitive) or further out (less sensitive). This is because the angle deltas for each pitch change grow as you get further out. Then, we have a second curve, that converts your "intended" pitch into a restricted pitch. This allows us to further fine tune how targeters move on the ground.</li>
-								<li>Ported and setup a sensitivity system that enables you to use your exact settings in Smite 1, in Smite 2, and get the same turn deltas you'd expect. It feels 1:1.</li>
+								<li>For restricted, we use two main curves. One that determines your pitch "sensitivity" based on whether or not you're looking closer to your feet (more sensitive) or further out (less sensitive). This is because the angle deltas for each pitch change grow as you get further out. Then, we have a second curve, that converts your "intended" pitch into a restricted pitch. This allows us to further fine tune how targeters move on the ground.</li>
+								<li>Ported and set up a sensitivity system that enables you to use your exact settings in Smite 1, in Smite 2, and get the same turn deltas you'd expect. It feels 1:1.</li>
 								<li>Wrote scripts for Smite 1 that spit out exact turn steps and deltas so that I could get controller sensitivities/controls exactly right.</li>
 								<li>Implemented turn acceleration for controllers. This ramps up your turn speed as you hold a specific turn.</li>
 								<li>Helped define the logic to ensure that the camera Z heights match up between Smite 1 and 2.</li>
@@ -85,11 +85,11 @@
 							</p></br>
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>Implemented flight physics that is used on a couple characters. Allows you to ascend, fly for a bit, and descent afterwards. All design configurable. Includes turn radius logic, camera speed adjustments, input while ascending, speed and acceleration, etc.</li>
-								<li>Completely overhauled Smite 2's velocity and acceleration systems to match Smite 1. This involved porting over CalcVelocity functions and resolving engine discrepencies. Specifically made sure input processing for movement was happening as quickly as possible.</li>
+								<li>Completely overhauled Smite 2's velocity and acceleration systems to match Smite 1. This involved porting over CalcVelocity functions and resolving engine discrepancies. Specifically made sure input processing for movement was happening as quickly as possible.</li>
 								<li>Reintroduced back body blocking by better supporting server authorized movement.</li>
 								<li>Wrote specific client interpolation logic for smoothing server corrections. It works by caching your current client location, rewinding unack'd moves, applying the server correction, resetting your location back to the cached one, taking the difference between the intended server location and your current, and then applying an interpolated amount of that correction every tick. For example now, if you are slowed on the server while running at full speed, normally you would hitch because you'd have to correct for the distance traveled at full speed that was actually slow on the server. Instead of hard popping, you now interpolate that correction.</li>
 								<li>Improved general movement tweens by allowing you to gain full movement speed at a specific input direction whenever you finish the tween. If you hold right for example as the tween resolves, you'll immediately start at full speed right. It feels super fluid to play.</li> <a href="https://x.com/KhaosComplex/status/1834312805421326645">https://x.com/KhaosComplex/status/1834312805421326645</a>
-								<li>Helped pioneer ignoring client corrections during pre-determined movements. Basically if you know the end location, then client shouldn't need to correct it's location during a tween/dash/etc. as long as it resolves in the same spot as the server would. This prevents a ton of jitter/hitching. First character in Smite 1 to use it was Maui, and that pattern continued well into Smite 2.</li>
+								<li>Helped pioneer ignoring client corrections during pre-determined movements. Basically if you know the end location, then the client shouldn't need to correct it's location during a tween/dash/etc. as long as it resolves in the same spot as the server would. This prevents a ton of jitter/hitching. First character in Smite 1 to use it was Maui, and that pattern continued well into Smite 2.</li>
 								<li>Certain abilities can cause you to encroach other players. Wrote specific logic to prevent further encroachment (but allow you to leave the player).</li>
 							</ul>
 
@@ -115,7 +115,7 @@
 								<font size="4"><strong>Performance:</strong></font>
 							</p></br>
 							<ul style="font-size: 1rem; margin-left: 1em;">
-								<li>Profiling the game whenever we get opportunities with traces. As my main focus has been game feels, on Smite 2 specifically I haven't had as many opportunities to directly optimize the game, but I have delegated a lot of what I discovered in the traces. Worked with multiple departments to resolve issues I found. (shadows, rendering, UI, GP, etc.)</li>
+								<li>Profiling the game whenever we get opportunities with traces. As my main focus has been game feels, on Smite 2 specifically I haven't had as many opportunities to directly optimize the game, but I have delegated a lot of what I discovered in the traces. I worked with multiple departments to resolve issues I found. (shadows, rendering, UI, GP, etc.)</li>
 							</ul>
 
 							<p style="display: inline;">
@@ -137,7 +137,7 @@
 								</p>
 								<ul style="font-size: 1rem; margin-left: 1em;">
 									<li>Updated his second ability (Earthbreaker) physics from Smite 1 -> 2. In Smite 1, targets being knocked up specifically trace to the first blocking wall, and choose that as the end location. In Smite 2, it is a true lob where they can physically slide against walls as they travel.</li>
-									<li>His ultimate (Excavate) has him pick up a huge boulder and throw it. I wrote specific logic to handle the tradeoff between the boulder mesh in his hands and the deployable he ends up throwing. We let the boulder be visible in his animation until the deployable spawns. Once the deployable spawns we specifically track where the mesh is in your hands, find the location/rotation offsets, and offset the deployable's boulder mesh to match up. Then we tell the mesh in your hands to hide. As the boulder travels through the air, it corrects the offset before landing so by the time it's on the ground it's centered properly again. This creates a seemless handoff regardless of latency or ping.</li>
+									<li>His ultimate (Excavate) has him pick up a huge boulder and throw it. I wrote specific logic to handle the tradeoff between the boulder mesh in his hands and the deployable he ends up throwing. We let the boulder be visible in his animation until the deployable spawns. Once the deployable spawns we specifically track where the mesh is in your hands, find the location/rotation offsets, and offset the deployable's boulder mesh to match up. Then we tell the mesh in your hands to hide. As the boulder travels through the air, it corrects the offset before landing so by the time it's on the ground it's centered properly again. This creates a seamless handoff regardless of latency or ping.</li>
 									<li>Implemented a ton of physics features to have the boulder vertically bounce multiple times, and bounce off walls. It also has speed dampening and call back events for all those bounces that design can hook into. Also separated the target radius from the world collision radius to allow it to move in between walls better.</li>
 								</ul>
 							</div>
@@ -162,9 +162,9 @@
 							</p></br>
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>Completely overhauled and pioneered a new crit probability algorithm that enables you to have your intended crit chance without the potential of drawn out miss/crit streaks.</li>
-								<li>Uses C style PRNG, which is basically is a formula for determining raw crit chance. Let's say you have 25% crit, with C PRNG you start at 8.5%. Everytime you miss, you increase by 8.5% for the next attack. 8.5% - 17% - 25.5% -> etc. At some point, you will crit. This will reset the crit chance back to 8.5%. This helps ensure that you don't go too long without missing crits compared to normal random chance, and still works out to be a real 25% chance (you'll crit 25/100 times for example).</li>
+								<li>Uses C style PRNG, which is basically a formula for determining raw crit chance. Let's say you have 25% crit, with C PRNG you start at 8.5%. Everytime you miss, you increase by 8.5% for the next attack. 8.5% - 17% - 25.5% -> etc. At some point, you will crit. This will reset the crit chance back to 8.5%. This helps ensure that you don't go too long without missing crits compared to normal random chance, and still works out to be a real 25% chance (you'll crit 25/100 times for example).</li>
 								<li>However, we take it a step further in Smite. We flip the formula a bit once you start the crit streak. Basically with every successive crit, you gain more chance to miss. With every successive miss, you gain more chance to crit. This clamps the streaks on both sides, and still perserves the authenticity of the true crit rate.</li>
-								<li>Feel free to read a more detailed explaination of the solution here:</li><a href="https://x.com/KhaosComplex/status/1480945933575720961">https://x.com/KhaosComplex/status/1480945933575720961</a>
+								<li>Feel free to read a more detailed explanation of the solution here:</li><a href="https://x.com/KhaosComplex/status/1480945933575720961">https://x.com/KhaosComplex/status/1480945933575720961</a>
 							</ul>
 
 							<p style="display: inline;">
@@ -182,6 +182,20 @@
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>Learned quickbuild and various surrounding systems to reliably fix our nightly builds and make sure our automated processes were running.</li>
 							</ul>
+
+							<p style="display: inline;">
+								<font size="4"><strong>Skins:</strong></font>
+							</p></br>
+							<ul style="font-size: 1rem; margin-left: 1em;">
+								<li>Supported various skin technologies in our game with differing layers of complexity.</li>
+								<li>Small examples include adding a blind fold to Eleven's Stranger Thing's skin whenever Scylla casts her third ability (Sentinel).</li>
+								<li>Supporting multiple mesh swaps on our most expensive T5 skins.</li>
+								<li>Created an entire backend to support a skin that levels up and persists between games. Every time you get a kill with Izanami's Queen of Cards skin, you roll a hand of 4 cards. If you get all of the same suit, then whenever you're in that corresponding suit for the skin you'll get upgraded FX and visuals. You can always toggle them on and off. Both the progress and the settings are saved and persist between match instances.</li>
+								<li>Supported driving around in Cthulhu's Toon Mania skin. Added a press spacebar to honk feature.</li>
+							</ul>
+							<img src="images/fulls/izanami_queen-of-cards.jpg" style="max-width:70%; max-height:70%;" alt="" />
+							<img src="images/fulls/toonmaniacthulhu.jpg" style="max-width:70%; max-height:70%;" alt="" />
+							<img src="images/fulls/strangerthingseleven.png" style="max-width:70%; max-height:70%;" alt="" />
 						</div>
 					</div>
 				</div>
@@ -193,7 +207,7 @@
 				<!-- New Section: Engineering Smite 2 -->
 				<header class="major">
 					<h3>Leadership (Smite 1)</h3>
-					<h4><i>Information about my time as Lead of Gameplay Programming.</i></h4>
+					<h4><i>Information about my time as Lead of Gameplay Programming (as well as Design, QA, and UI).</i></h4>
 				</header>
 
 				<div class="god-development-container">
@@ -203,7 +217,7 @@
 								<font size="4"><strong>Management:</strong></font>
 							</p></br>
 							<ul style="font-size: 1rem; margin-left: 1em;">
-								<li>Led a team of 3-4 gameplay programmers, overseeing the complete lifecycle of gameplay features.</li>
+								<li>Led a team of 4 gameplay programmers, 4 designers, 4 QA, and 1 UI programmer.</li>
 								<li>Managed scheduling, jiras, and task delegation for our upcoming features.</li>
 								<li>Conducted biweekly 1:1s and performance/code reviews.</li>
 								<li>Collaborated strategically with other company leads/directors for game direction.</li>
@@ -276,8 +290,8 @@
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>Considered one of the best gods to ever get added to Smite. Incredibly tech rich.</li>
 								<li>Implemented new technology for in hand attacks that home in on his main target. Included input checking (holding back while attacking) to disable the homing portion based.</li>
-								<li>Improved our ability swapping technology. Originally we hard pushed/popped abilities out of their equipment array whenever a swap occured. This is because the specific index in the array determined which ability slot it corresponded with. Instead, we now hard cache all of their potential abilities and store them in one larger equipment array (32 elements). Whenever a swap occurs, we just alter the indexes that those ability slots point to and update the icons. The elements themselves never move, just the indexes that we point to update. This allows us swap abilities icons immediately on clients, and reduced network overhead by no logner needing to replicate a whole new ability to the client every time a swap occured. Made the entire system much more responsive.</li>
-								<li>Created a clever solution to handle allowing his ultimate (Excalibur's Wrath) to animate all targets while being slashed around. We animate a box mesh, hide it, attach the targets to it, and tell the box to animate. This gives his ulimate an extremely unique and charateristic feel.</li>
+								<li>Improved our ability swapping technology. Originally we hard pushed/popped abilities out of their equipment array whenever a swap occurred. This is because the specific index in the array determined which ability slot it corresponded with. Instead, we now hard cache all of their potential abilities and store them in one larger equipment array (32 elements). Whenever a swap occurs, we just alter the indexes that those ability slots point to and update the icons. The elements themselves never move, just the indexes that we point to update. This allows us to swap ability icons immediately on clients, and reduces network overhead by no longer needing to replicate a whole new ability to the client every time a swap occurred. Made the entire system much more responsive.</li>
+								<li>Created a clever solution to handle allowing his ultimate (Excalibur's Wrath) to animate all targets while being slashed around. We animate a box mesh, hide it, attach the targets to it, and tell the box to animate. This gives his ultimate an extremely unique and characteristic feel.</li>
 								<li>Strongly inspired by narrative action games, I created a large suite of procedural camera tools. These mainly allowed design to control camera movement and zoom keyframes during his abilities to again, give him an even more distinct feel. This is most noticeable on the receiving end from his ultimate, where you camera cleanly transitions and gently sways while you're being slashed around.</li>
 							</ul>
 						</div>
@@ -294,7 +308,7 @@
 							</p>
 							<ul style="font-size: 1rem; margin-left: 1em;">
 								<li>For his third ability (Protector's Surge), created new tween movement technology to support following a target. Managed gracefully the plethora of states and edge cases that the target player you're flying to can be in to make sure Horus always safely reaches a target and resolves.</li>
-								<li>Created a clever way to support his ultimate (To The Skies!), which is having a clone fly up while your real body sits on the ground. You target a end location and teleport everyone to it. To support the clone, we leave the real body behind and spawn a new pawn where we forward all of the movement inputs, velocity, acceleration, etc. to (while zeroing them out on the main pawn). The camera is also then set to follow the clone.</li>
+								<li>Created a clever way to support his ultimate (To The Skies!), which is having a clone fly up while your real body sits on the ground. You target an end location and teleport everyone to it. To support the clone, we leave the real body behind and spawn a new pawn where we forward all of the movement inputs, velocity, acceleration, etc. to (while zeroing them out on the main pawn). The camera is also then set to follow the clone.</li>
 								<li>For the large circular teleport, specific safety checks were included to prevent characters from teleporting into world geometry and invalid locations. Basically always finding the first valid location flush against the wall from the direction towards the center of the teleport deployable.</li>
 							</ul>
 						</div>
@@ -313,7 +327,7 @@
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>Instead of mana, engineered a new system called Omi. She has no individual cooldowns on abilities, but instead they have specific Omi costs. She can spam whichever abilities she wants, but once her Omi runs out, the cooldowns displayed represent how long until you'll have enough Omi to fire them again. Wrote specific logic to convert mana into CDR since she wouldn't benefit from mana otherwise.</li>
 							<li>For her third ability Riptide (basically enter, get launched forward), created a clean system to tween you towards the center before launching you out forward (so that it's consistent no matter where you enter).</li>
-							<li>For Riptide as well, wrote a specific lockout system to prevent being permentnaly air juggled against a wall or between two separate Yemoja Riptide deployables.</li>
+							<li>For Riptide as well, wrote a specific lockout system to prevent being permanently air juggled against a wall or between two separate Yemoja Riptide deployables.</li>
 							<li>Her fourth ability (River's Rebuke) uses an interesting "zipper" collision shape to ensure that as the waves crash, the target is hit in ways that correspond with the ultimate visuals.</li>
 							<li>Since River's Rebuke also has blocking walls, we push players towards the center of the ult if they're in the walls. Since that can cause players to be pushed permanently against wall geo, a specific linear algebra based algorithm was written to determine whether or not the location the player is gonna be pushed to would be invalid, and if so, push them out instead.</li>
 						</ul>
@@ -352,7 +366,7 @@
 							<li>She has two stances that swap when she casts her third ability (Grounding Dive). Swapping between those states drives an anim state change to go from upright to quad stances.</li>
 							<li>Her first ability (Primordial Onslaught) has specific logic programmed to correspond the number of shots she's charged with visual elements that spawn behind her.</li>
 							<li>Her second ability (Ruination) brought rounded triangle shapes into the game.</li>
-							<li>Her ultimate ability (Children of Creation) is another stance change that then lets her pick between 3 different abilities. The ability icon swap is simulated on clients immediately and feedback is seemless.</li>
+							<li>Her ultimate ability (Children of Creation) is another stance change that then lets her pick between 3 different abilities. The ability icon swap is simulated on clients immediately and feedback is seamless.</li>
 							<li>2 of those ultimate abilities are AI based. One that spawns in waves and pushes towers. Another that immediately picks a target and dashes towards it.</li>
 							<li>Her quad stance first ability (Consume) added new tech to specifically allow her to have two unique jungle buffs (something that hadn't been done before). We were able to add tech that allows her to execute a jungle camp, gaining a lesser form of the buff, while still dropping the buff for another team to pick up.</li>
 						</ul>
@@ -388,13 +402,13 @@
 						</p>
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>The last god that I was the <strong>primary</strong> developer on. After Ishtar is when I transitioned to Lead of Gameplay Programming and needed to focus more on management, scheduling responsibilities.</li>
-							<li>She was a strong culimination of a lot of the lessons I had learned over the years.</li>
+							<li>She was a strong culmination of a lot of the lessons I had learned over the years.</li>
 							<li>Her first ability (Imbue Arrows) lets her switch between 3 completely unique auto attacks. Leveraged the tech I have mentioned earlier from both Tiamat and King Arthur when it comes to ability swapping. Those 3 auto attacks are one that lobs AOE explosions, one that fires multiple shots in a cone, and one that fires a longer range shot.</li>
 							<li>The Spread Shot auto attack required specific logic to ensure only the center arrow applied in hand basic attack item procs.</li>
 							<li>Her second ability (Rolling Thunder) used distance past a aim point to determine whether or not to spawn deployables in a forward or backward sequence.</li>
 							<li>The third ability (Jolt) was engineered to be incredibly responsive. You dash forward and on impact, begin a sequence where you launch yourself backward while firing an arrow to the ground. The entire sequence was programmed into a single ability space (rather than chaining multiple abilities, reducing complication). Upon impact, specific replication is done to reach down to the client informing of the impact, any corrections needed, and the dash direction.</li>
 							<li>To do the arrow part, I wrote spcific deployable tech. The deployable would spawn, and then immediately spawn a projectile from a socket located on the character. The projectile would be told to home in on the deployable, making impact in a specific amount of time. All of these settings, configurable by design. This allowed a projectile to seemlessly spawn from you, regardless of where you were on the client, and always reach the deployable to simulate an impact explosion in sync with the timings/visuals.</li>
-							<li>The ultimate (Blades of Retribution) also had specific client responsiveness tech built in. When you fire the ult, multiple swords fly out in a cone like pattern. When they land, you can recall them. Anyone hit twice is stunned. To improve client responsiveness I wrote a queue system to allow players to prematurely press the ult while the blades are still traveling. If they do this, it'll queue up the recall to happen immediately upon landing.</li>
+							<li>The ultimate (Blades of Retribution) also had specific client responsiveness tech built in. When you fire the ult, multiple swords fly out in a cone-like pattern. When they land, you can recall them. Anyone hit twice is stunned. To improve client responsiveness I wrote a queue system to allow players to prematurely press the ult while the blades are still traveling. If they do this, it'll queue up the recall to happen immediately upon landing.</li>
 							<li>She generally released with close to no bugs or residual issues. Players specifically commented on her being one of the smoothest releases Smite had had in awhile. At this time, with all the risk management principles I had learned over the years, I strongly wanted to prove we could ship a new god with utmost polish.</li>
 						</ul>
 					</div>
@@ -420,11 +434,11 @@
 						</p>
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>For Baba Yaga, I owned her first and third ability.</li>
-							<li>Her first ability (Wild Witchcraft) is super unique to the game. Before you fire the ability, you're granted 1 of 4 random travel patterns, and 1 of 4 elements. The shapes are 2 differnt oriented L's, a Y, and an Oval. As the projectiles travel, they also leave behind a trail. Depending on the element, that trail/projectile hit will apply unique effects.</li>
+							<li>Her first ability (Wild Witchcraft) is super unique to the game. Before you fire the ability, you're granted 1 of 4 random travel patterns, and 1 of 4 elements. The shapes are 2 different oriented L's, a Y, and an Oval. As the projectiles travel, they also leave behind a trail. Depending on the element, that trail/projectile hit will apply unique effects.</li>
 							<li>To do the trail, I created specific deployable tech that spawns a collision proxy volume. Instead of growing the volume, we only allow a specific % of the collision proxy area to be "active". As time passes (matching the projectile travel speed), we enable those portions of the proxy to touch and process people.</li>
 							<li>Her first ability object manages the random shape and element picked, and replicates that down to the client. Whenever the projectile and deployable are spawned, we read in that data and apply the corresponding visuals and manage which effects apply to the targets.</li>
-							<li>The oval shape posed interesting challenges, as we had to program a projectile to specifically follow a oval path. This includes highlighting and also the collision proxy touch fill algorithm that I spoke about earlier. I decided on a velocity algorithm that applied less movement in the horizontal direction than the forward. So instead of a perfect circle, it was thinner on the horizontal plane. For the collision proxy fill, I used one large circule collision proxy. I trimmed (prevented) touches that exceed the Oval's horizontal bounds, and used angle logic to determine at what degree the proxy was valid to touch you. (Instead of distance like the L and Y shapes use).</li>
-							<li>Her third ability (Blast Off!) has specific logic makes sure as she leaps, she's always leaping to a valid location. Either the location she's targeting is valid, or a trace to the wall finds a spot flush with the wall that she can reach instead.</li>
+							<li>The oval shape posed interesting challenges, as we had to program a projectile to specifically follow an oval path. This includes highlighting and also the collision proxy touch fill algorithm that I spoke about earlier. I decided on a velocity algorithm that applied less movement in the horizontal direction than the forward. So instead of a perfect circle, it was thinner on the horizontal plane. For the collision proxy fill, I used one large circular collision proxy. I trimmed (prevented) touches that exceed the Oval's horizontal bounds, and used angle logic to determine at what degree the proxy was valid to touch you. (Instead of distance like the L and Y shapes use).</li>
+							<li>Her third ability (Blast Off!) has specific logic that makes sure as she leaps, she's always leaping to a valid location. Either the location she's targeting is valid, or a trace to the wall finds a spot flush with the wall that she can reach instead.</li>
 						</ul>
 					</div>
 				</div>
@@ -456,14 +470,14 @@
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>I was in charge of Cliodhna's passive ability (Phantasmal), which is by far one of Smite's most ambitious technical additions.</li>
 							<li>Phantasmal allows you to enter world geometry. While inside the world geometry, we render the boundaries of that world geo with splines. While in that state as well, you can still see all enemies, allies, and their visuals (meshes, VFX, etc.)</li>
-							<li>Supporting this feature was a massive undertaking. Working with my superior at the time, we co developed an algorithm that would scan the map and find those points along the walls. In a hexogonal pattern, the map tracker would make a grid of dots, and do traces between a lower layer of dots to a higher layer. For any world geo intersection points, we'd add them to a list with an index marking a specific wall.</li>
+							<li>Supporting this feature was a massive undertaking. Working with my superior at the time, we co developed an algorithm that would scan the map and find those points along the walls. In a hexagonal pattern, the map tracker would make a grid of dots, and do traces between a lower layer of dots to a higher layer. For any world geo intersection points, we'd add them to a list with an index marking a specific wall.</li>
 							<li>Since this required a lot of data processing, we specifically amortized it to do bits and pieces per tick, as to not affect frame rate. By the time you started moving, all the data had finished processing and was stored for use.</li>
 							<li>After the map tracker was finished, I became responsible for making the visual presentation work.</li> 
 							<li>First thing, when entering inside the world geo I rendered a black screen to the foreground, this culled everything behind the screen. Then given the grid of points we have that now span the perimeters of all the walls, I spawned mesh splines and connected them along those points to "outline" the walls. I pushed those splines into the foreground.</li>
 							<li>I then went through creating a management system that would push ALL meshes and VFX in the world to the foreground. That way it would also render on top of the black screen (allowing the rest of the world to still be hidden). This was an incredibly challenging process as it involved finding every entry and exit point for our mesh/VFX spawns on all 130 characters. We also have mesh/VFX pools/recyclers which posed an extra challenge.</li>
-							<li>Upon leaving, the walls, I also had to push all of those systems back into the mid ground so nothing rendered incorrectly. Working with QA on all the edge cases was a lot, but we were able to get them all resolved.</li>
+							<li>Upon leaving the walls, I also had to push all of those systems back into the mid ground so nothing rendered incorrectly. Working with QA on all the edge cases was a lot, but we were able to get them all resolved.</li>
 							<li>Lastly, I spawn a shroud FX around the character to not give them infinite distance.</li>
-							<li>On top of handling the visuals, I also had to handle the physics while inside the wall. Because UE3 at the time did not have baked in support for letting you roam around inside world geoemtry. Colliding against inner faces did not do the sliding logic you'd expect, instead your character would just hard stop. So I had to specifically write physics code to slide your velocity along the inner faces of the world geo when you're running against it with a non 0 angle.</li>
+							<li>On top of handling the visuals, I also had to handle the physics while inside the wall. Because UE3 at the time did not have baked in support for letting you roam around inside world geometry. Colliding against inner faces did not do the sliding logic you'd expect, instead your character would just hard stop. So I had to specifically write physics code to slide your velocity along the inner faces of the world geo when you're running against it with a non 0 angle.</li>
 							<li>If you do however run against the wall at a straight angle, then you will push yourself out. Specific logic as well was written to handle those cases.</li>
 						</ul>
 					</div>
@@ -560,7 +574,7 @@
 						</p>
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>For his second ability (Mystical Ulua) I added entirely new tween to target tech to support disabling client side corrections until after the tween is over.</li>
-							<li>Since the tween target is synced between client and server, there's no reason to server correct during the follow part, since that is bound to have discrepencies. By disabling it during the tween, it looks super smooth and without jitter. This same pattern is used in Smite 2 today and was applied to more features in Smite 1 after implementation.</li>
+							<li>Since the tween target is synced between client and server, there's no reason to server correct during the following part, since that is bound to have discrepancies. By disabling it during the tween, it looks super smooth and without jitter. This same pattern is used in Smite 2 today and was applied to more features in Smite 1 after implementation.</li>
 						</ul>
 					</div>
 				</div>
@@ -576,7 +590,7 @@
 						</p>
 						<ul style="font-size: 1rem; margin-left: 1em;">
 							<li>Was responsible implementing his ultimate (End of Days) in its entirety.</li>
-							<li>The ability shoots you up as a large meteor and lets you move around the map. At some point during your descent, miniture meteorites break off from you landing in random locations and spawning imps.</li>
+							<li>The ability shoots you up as a large meteor and lets you move around the map. At some point during your descent, miniature meteorites break off from you landing in random locations and spawning imps.</li>
 							<li>Specific logic was written to determine as you were falling if you were not giving yourself enough time, given your speed, to land in a valid spot. At the point that the game determines that, it picks a spot for you near where you're aiming, and tweens you to end there.</li>
 							<li>The random imp spawn locations use logic to ensure they also do not ever pick invalid locations.</li>
 						</ul>

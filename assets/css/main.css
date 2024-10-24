@@ -2534,7 +2534,7 @@
 		}
 
 		#header h1 {
-			color: rgba(255, 255, 255, 0.5);
+			color: rgba(255, 255, 255, 0.65);
 			font-size: 1.35em;
 			line-height: 1.75em;
 			margin: 0;
@@ -3243,5 +3243,5 @@
 
 	h1
 	{
-		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Adjust values as needed */
+		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adjust values as needed */
 	}
